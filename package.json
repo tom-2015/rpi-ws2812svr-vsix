@@ -1,0 +1,71 @@
+{
+    "name": "ws2812svr",
+    "displayName": "ws2812svr",
+    "description": "ws2812 server script",
+    "version": "0.0.1",
+    "publisher": "tom-2015",
+    "icon": "images/logo.png",
+    "engines": {
+        "vscode": "^1.59.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tom-2015/rpi-ws2812svr-vsix.git"
+    },
+    "categories": [
+        "Programming Languages",
+        "Language Packs",
+        "Formatters"
+    ],
+    "keywords": [
+        "WS2812svr",
+        "Raspberry",
+        "LEDs"
+    ],
+    "activationEvents": [
+        "onLanguage:ws2812"
+    ],
+    "main": "./client/out/extension",
+    "contributes": {
+        "languages": [
+            {
+                "id": "ws2812",
+                "aliases": [
+                    "ws2812 server script",
+                    "ws2812"
+                ],
+                "extensions": [
+                    ".ws"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "ws2812",
+                "scopeName": "source.ws",
+                "path": "./syntaxes/ws2812.tmLanguage.json"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -b",
+        "watch": "tsc -b -w",
+        "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+        "test": "sh ./scripts/e2e.sh"
+    },
+    "devDependencies": {
+        "@types/mocha": "^8.2.2",
+        "@types/node": "^16.3.3",
+        "@typescript-eslint/eslint-plugin": "^4.23.0",
+        "@typescript-eslint/parser": "^4.23.0",
+        "eslint": "^7.26.0",
+        "mocha": "^8.3.2",
+        "typescript": "^4.3.5",
+        "@types/vscode": "^1.50.0"
+    },
+    "dependencies": {
+        "typescript": "^4.3.5"
+    }
+}

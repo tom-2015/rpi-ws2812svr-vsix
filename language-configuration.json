@@ -1,0 +1,31 @@
+{
+    "comments": {
+        // symbol used for single line comment. Remove this entry if your language does not support line comments
+        "lineComment": "#"
+    },
+    // symbols used as brackets
+    "brackets": [
+        ["(", ")"],
+        ["{", "}"]
+    ],
+    // symbols that are auto closed when typing
+    "autoClosingPairs": [
+        ["(", ")"],
+        ["\"","\""],
+        ["{", "}"]
+    ],
+    // symbols that can be used to surround a selection
+    "surroundingPairs": [
+        ["\"", "\""]
+    ],
+    "folding": {
+      "markers": {
+        "start": "^\\s*(do|thread_start)(\\s*|\\().*$",
+        "end": "^\\s*(loop|thread_stop)(\\s*|\\().*$"
+      }
+    },
+    "indentationRules": {
+      "increaseIndentPattern": "^\\s*(do|thread_start)(\\s*|\\().*$",
+      "decreaseIndentPattern": "^\\s*(loop|thread_stop)(\\s*|\\().*$"
+    }
+}

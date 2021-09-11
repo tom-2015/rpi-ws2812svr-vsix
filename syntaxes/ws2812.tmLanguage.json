@@ -1,0 +1,32 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "ws2812 server script",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.ws2812",
+				"match": "\\b(setup|init|render|rotate|rainbow|fill|delay|brightness|fade|gradient|random|readjpg|readpng|blink|random_fade_in_out|color_change|chaser|fly_in|fly_out|progress|save_state|load_state|set_thread_exit_type|thread_start|thread_stop|wait_thread|kill_thread|wait_signal|signal_thread|reset|do|loop|config_2D|init_layer|change_layer|draw_circle|cls|draw_image|draw_line|draw_sharp_line|draw_rectangle|message_board|print_text|text_input|set_pixel_color|record_audio|light_organ|pulses|vu_meter)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.ws2812",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.ws2812",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.ws"
+}
