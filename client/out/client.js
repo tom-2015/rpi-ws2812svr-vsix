@@ -26,10 +26,10 @@ function createLanguageClient(context) {
     // Options to control the language client
     let clientOptions = {
         // Register the server for plain text documents
-        documentSelector: ["ws2812"],
+        documentSelector: [{ scheme: 'file', language: 'ws2812' }],
         initializationOptions: {
-            dataPaths: [] /*,
-            embeddedLanguages: { css: true, javascript: true }*/
+            dataPaths: []
+            //embeddedLanguages: { css: true, javascript: true }
         }
     };
     // Create the language client.

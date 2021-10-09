@@ -4,7 +4,7 @@
  * ------------------------------------------------------------------------------------------ */
 
 import * as path from 'path';
-//import path = require('node:path');
+
 import { workspace, ExtensionContext } from 'vscode';
 
 import {
@@ -38,10 +38,10 @@ export function createLanguageClient(context: ExtensionContext) {
 	// Options to control the language client
 	let clientOptions: LanguageClientOptions = {
 		// Register the server for plain text documents
-		documentSelector: ["ws2812"],
+		documentSelector: [{ scheme: 'file', language: 'ws2812' }], // or just ["ws2812"] ??? 
 		initializationOptions: {
-			dataPaths: []/*,
-			embeddedLanguages: { css: true, javascript: true }*/
+			dataPaths: []
+			//embeddedLanguages: { css: true, javascript: true }
 		}
 	};
 

@@ -82,18 +82,20 @@ export class ws2812SignatureHelpProvider implements SignatureHelpProvider {
                 signature.activeParameter = active_parameter;
                 signature.activeSignature = active_signature;
                 signature.signatures = [];
-                snippet.signatures.forEach(sig_info => {
-                    var signature_info =  new SignatureInformation (sig_info.label , new MarkdownString(sig_info.documentation, true) );
-                    signature.signatures.push(signature_info);
-                    signature_info.parameters = [];
-                    sig_info.parameters.forEach(param_info => {
-                        signature_info.parameters.push(new ParameterInformation(param_info.label, new MarkdownString(param_info.documentation, true)));
+                if (snippet.signatures!=undefined){
+                    snippet.signatures.forEach(sig_info => {
+                        var signature_info =  new SignatureInformation (sig_info.label , new MarkdownString(sig_info.documentation, true) );
+                        signature.signatures.push(signature_info);
+                        signature_info.parameters = [];
+                        sig_info.parameters.forEach(param_info => {
+                            signature_info.parameters.push(new ParameterInformation(param_info.label, new MarkdownString(param_info.documentation, true)));
+                        });
                     });
-                });
-                
+                }
                 return signature;
-
-                //new SignatureInformation ("label:String", "initializes a new channel") ]; //https://vshaxe.github.io/vscode-extern/vscode/SignatureInformation.html
+                
+                //https://vshaxe.github.io/vscode-extern/vscode/SignatureInformation.html
+                //new SignatureInformation ("label:String", "initializes a new channel") ]; 
 
                 //https://vshaxe.github.io/vscode-extern/vscode/ParameterInformation.html
                 //signature.signatures[0].parameters = [new ParameterInformation("param 1", "doc param 1"),

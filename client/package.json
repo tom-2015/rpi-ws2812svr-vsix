@@ -1,24 +1,23 @@
 {
-	"name": "lsp-sample-client",
-	"description": "VSCode part of a language server",
-	"author": "Microsoft Corporation",
-	"license": "MIT",
-	"version": "0.0.1",
-	"publisher": "vscode",
+	"name": "ws2812svr",
+	"description": "ws2812 server script",
+	"author": "tom-2015",
+	"publisher": "tom-2015",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Microsoft/vscode-extension-samples"
+		"url": "https://github.com/tom-2015/rpi-ws2812svr-vsix.git"
 	},
+	"license": "MIT",
 	"engines": {
 		"vscode": "^1.59.0"
 	},
 	"dependencies": {
-		"vscode-languageclient": "^7.0.0",
-		"typescript": "^4.3.5"
+		"vscode-languageclient": "^7.0.0"
 	},
 	"devDependencies": {
 		"@types/vscode": "^1.52.0",
 		"@vscode/test-electron": "^1.6.1",
-		"@types/node": "^16.3.3"
+		"@types/node": "^16.3.3",
+		"typescript": "^4.3.5"
 	}
 }

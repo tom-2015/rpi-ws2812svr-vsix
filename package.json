@@ -2,9 +2,10 @@
     "name": "ws2812svr",
     "displayName": "ws2812svr",
     "description": "ws2812 server script",
-    "version": "0.0.1",
+    "version": "0.1.1",
     "publisher": "tom-2015",
     "icon": "images/logo.png",
+    "license": "MIT",
     "engines": {
         "vscode": "^1.59.0"
     },
@@ -20,19 +21,22 @@
     "keywords": [
         "WS2812svr",
         "Raspberry",
-        "LEDs"
+        "LEDs",
+        "WS2812",
+        "SK6812",
+        "SK9822"
     ],
     "activationEvents": [
         "onLanguage:ws2812"
     ],
-    "main": "./client/out/extension",
+    "main": "./client/out/extension.js",
     "contributes": {
         "languages": [
             {
                 "id": "ws2812",
                 "aliases": [
-                    "ws2812 server script",
-                    "ws2812"
+                    "ws2812",
+                    "WS2812"
                 ],
                 "extensions": [
                     ".ws"
@@ -46,24 +50,36 @@
                 "scopeName": "source.ws",
                 "path": "./syntaxes/ws2812.tmLanguage.json"
             }
+        ],
+        "snippets": [
+            {
+                "language": "ws2812",
+                "path": "./snippets/snippets.json"
+            }
         ]
     },
     "scripts": {
-        "vscode:prepublish": "npm run compile",
         "compile": "tsc -b",
         "watch": "tsc -b -w",
         "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
-        "test": "sh ./scripts/e2e.sh"
+        "test": "sh ./scripts/e2e.sh",
+        "vscode:prepublish": "npm run webpack",
+        "webpack": "webpack --mode production --config ./client/webpack.config.js && webpack --mode production --config ./server/webpack.config.js",
+        "webpack:dev": "webpack --mode none --config ./client/webpack.config.js && webpack --mode none --config ./server/webpack.config.js",
+        "test-compile": "tsc -p ./"
     },
     "devDependencies": {
         "@types/mocha": "^8.2.2",
         "@types/node": "^16.3.3",
+        "@types/vscode": "^1.50.0",
         "@typescript-eslint/eslint-plugin": "^4.23.0",
         "@typescript-eslint/parser": "^4.23.0",
         "eslint": "^7.26.0",
+        "merge-options": "^3.0.4",
         "mocha": "^8.3.2",
-        "typescript": "^4.3.5",
-        "@types/vscode": "^1.50.0"
+        "ts-loader": "^9.2.6",
+        "webpack": "^5.58.1",
+        "webpack-cli": "^4.9.0"
     },
     "dependencies": {
         "typescript": "^4.3.5"

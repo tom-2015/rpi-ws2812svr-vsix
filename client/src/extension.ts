@@ -9,12 +9,14 @@ let client: LanguageClient;
 
 export function activate(context: ExtensionContext): void {
 
-	let { activeTextEditor } = window;
+	//let { activeTextEditor } = window;
 	
 	// Reset
-	function reset() {
+	//function reset() {
 
-	}
+	//}
+
+	//window.showInformationMessage("activated ws2812");
 
 	// Language document hover provider
 	languages.registerHoverProvider("ws2812", new HoverProvider());
