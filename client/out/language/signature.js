@@ -58,7 +58,7 @@ class ws2812SignatureHelpProvider {
                 index++;
             }
             //trim all arguments
-            for (var i = 0; i < argvalues.length - 1; i++)
+            for (var i = 0; i < argvalues.length; i++)
                 argvalues[i] = argvalues[i].trim();
             if (funct_name != "") {
                 //determine the signature index
@@ -66,6 +66,9 @@ class ws2812SignatureHelpProvider {
                     case 'setup':
                         if (argvalues.length >= 3 && argvalues[2] == "99") { //virtual channel
                             active_signature = 2;
+                        }
+                        else if (argvalues.length >= 3 && argvalues[2] == "100") {
+                            active_signature = 3;
                         }
                         else if (argvalues.length >= 3 && parseInt(argvalues[2]) >= 12) { //SPI SK9822 channel
                             active_signature = 1;

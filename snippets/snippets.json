@@ -28,7 +28,14 @@
 											{"label": "led_count", "documentation": "Number of leds in the string."},
 											{"label": "led_type", "documentation": "99, for virtual channel."},
 											{"label": "parent_channel_index", "documentation": "Parent channel index (must be a channel number from a previous call to setup)."},
-											{"label": "offset", "documentation": "Virtual channel starts at this LED index in the parent channel."}] }
+											{"label": "offset", "documentation": "Virtual channel starts at this LED index in the parent channel."}] },
+						{"label" : "setup channel, led_count, led_type, Host_ip, port, color_count" , 
+							"documentation":"Setup creates a channel that will render on a slave Raspberry Pi.", 
+							"parameters": [{"label": "channel", "documentation": "Channel number, must be incremented for each call to setup starting at 1."},
+											{"label": "led_count", "documentation": "Number of leds in the string."},
+											{"label": "led_type", "documentation": "100 for master - slave channel."},
+											{"label": "Host_ip", "documentation": "Host name or IP of the slave Raspberry Pi."},
+											{"label": "color_count", "documentation": "Default 3, set to 4 for use with the SK6812 RGBW chips."}] }
 									]
 		
 	},
@@ -52,6 +59,17 @@
 						"parameters": [{"label": "channel", "documentation": "Channel number to render."},
 									   {"label": "start", "documentation": "Before render change color of LEDs, starting at this position (default 0). Colors are given in next argument."},
 									   {"label": "colors", "documentation": "RRGGBBRRGGBBRRGGBBRRGGBB... color values of LEDs to change before render, starting at start index."}] }]
+	},
+	"slave_listen": {
+		"prefix": "slave_listen",
+		"body": "slave_listen channel, port",
+		"description": "Listens for incoming connection from master Raspberry pi.",
+		"reference": "",
+		"signatures": [{"label" : "slave_listen channel, port" , 
+						"documentation":"Listens for incoming connection from master Raspberry pi.", 
+						"parameters": [{"label": "channel", "documentation": "Channel number to render."},
+									   {"label": "port", "documentation": "TCP port to listen for incoming connection from master."}] 
+					  }]
 	},
 	"rotate": {
 		"prefix": "rotate",
@@ -190,6 +208,41 @@
 									   {"label": "operator", "documentation": "Determines binary operator to use to combine current LED color and PNG pixel color. OR,AND,XOR,NOT,= default is to copy PNG pixel color in the LED (=)."},
 									   {"label": "delay", "documentation": "Optional a delay if PNG has multiple pixel rows each row can be rendered into the LED strip with this delay (ms), default is 0 only first row is rendered."},
 									   {"label": "flip_rows", "documentation": "if 1 horizontal rows with odd index in the PNG will be rendered in reverse (can be used for 2D panels)."}
+							] }]
+	},
+	"camera": {
+		"prefix": "camera",
+		"body": "camera channel, camera_device, dst_x, dst_y, dst_width, dst_height, frame_count, delay",
+		"description": "Captures frames from a v4l2 MJPEG camera (Raspberry Pi camera or HDMI USB capture card). Prints this to the 2D matrix.",
+		"reference": "",
+		"signatures": [{"label" : "camera channel, camera_device, dst_x, dst_y, dst_width, dst_height, frame_count, delay" , 
+						"documentation":"Captures frames from a v4l2 MJPEG camera (Raspberry Pi camera or HDMI USB capture card). Prints this to the 2D matrix.", 
+						"parameters": [{"label": "channel", "documentation": "Channel number."},
+									   {"label": "camera_device", "documentation": "Video device file for camera in /dev, for ex. /dev/video0"},
+									   {"label": "dst_x", "documentation": "Destination x location (left top) where the frame will be printed on the display (default 0)."},
+									   {"label": "dst_y", "documentation": "Destination y location (left top) where the frame will be printed on the display (default 0)."},
+									   {"label": "dst_width", "documentation": "Destination width of the frame (default matrix width)."},
+									   {"label": "dst_height", "documentation": "Destination height of the frame (default matrix height)."},
+									   {"label": "frame_count", "documentation": "Capture and display this ammount of frames then terminate the command."},
+									   {"label": "delay", "documentation": "Delay in ms between each frame (default 10ms)."}
+							] }]
+	},
+	"ambilight": {
+		"prefix": "camera",
+		"body": "ambilight channel, video_device, leds_x, leds_y, image_width, image_height, ambi_type, start, delay",
+		"description": "Capture video from USB HDMI capture card or Raspberry camera and generate ambilight for your TV.",
+		"reference": "",
+		"signatures": [{"label" : "ambilight channel, video_device, leds_x, leds_y, image_width, image_height, ambi_type, start, delay" , 
+						"documentation":"Capture video from USB HDMI capture card or Raspberry camera and generate ambilight for your TV.", 
+						"parameters": [{"label": "channel", "documentation": "Channel number."},
+									   {"label": "video_device", "documentation": "Video device file for camera in /dev, for ex. /dev/video0"},
+									   {"label": "leds_x", "documentation": "Number of LEDs mounted on the back of the TV horizontally (at top)."},
+									   {"label": "leds_y", "documentation": "Number of LEDs mounted vertically."},
+									   {"label": "image_width", "documentation": "Width of image to capture, to reduce CPU load keep as low as possible, preferred = leds_x (default 640)."},
+									   {"label": "image_height", "documentation": "Height of image to capture, to reduce CPU load keep as low as possible, preferred = leds_y (default 360)."},
+									   {"label": "ambi_type", "documentation": "Type of ambilight: 1 = left,right and TOP. 2 = left, right, top and bottom. Default is 1."},
+									   {"label": "start", "documentation": "Start effect from this LED number in the string (default 0)."},
+									   {"label": "delay", "documentation": "Delay in ms between each frame (default 10ms)."}
 							] }]
 	},
 	"blink": {
@@ -417,6 +470,35 @@
 		"reference": "",
 		"signatures": [{"label" : "reset" , 
 						"documentation":"Resets all initialized LED strings, ready for new setup and init commands."
+					   }]
+	},
+	"exit": {
+		"prefix": "exit",
+		"body": "exit",
+		"description": "Exit/kill the program.",
+		"reference": "",
+		"signatures": [{"label" : "reset" , 
+						"documentation":"Exits/kills the program."
+					   }]
+	},
+	"debug": {
+		"prefix": "debug",
+		"body": "debug on_off",
+		"description": "Enables or disables debugging output.",
+		"reference": "",
+		"signatures": [{"label" : "debug on_off" , 
+						"documentation":"Enables or disables debugging output.",
+						"parameters": [{"label": "on_off", "documentation": "1 to turn debugging on, 0 to turn it off."}]
+					   }]
+	},
+	"echo": {
+		"prefix": "echo",
+		"body": "echo text",
+		"description": "Prints text.",
+		"reference": "",
+		"signatures": [{"label" : "echo text" , 
+						"documentation":"Prints text or sends to remote TCP connection.",
+						"parameters": [{"label": "text", "documentation": "Text to print."}]
 					   }]
 	},
 	"do": {

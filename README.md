@@ -23,6 +23,10 @@ none, please report in github [https://github.com/tom-2015/rpi-ws2812svr-vsix.gi
 
 ## Release Notes
 
+### 1.0.3
+
+Update new commands.
+
 ### 1.0.0
 
 Initial release

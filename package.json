@@ -2,7 +2,7 @@
     "name": "ws2812svr",
     "displayName": "ws2812svr",
     "description": "ws2812 server script",
-    "version": "0.1.1",
+    "version": "0.1.3",
     "publisher": "tom-2015",
     "icon": "images/logo.png",
     "license": "MIT",

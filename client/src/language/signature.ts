@@ -57,7 +57,7 @@ export class ws2812SignatureHelpProvider implements SignatureHelpProvider {
             }
 
             //trim all arguments
-            for (var i=0;i<argvalues.length-1;i++) argvalues[i]=argvalues[i].trim();
+            for (var i=0;i<argvalues.length;i++) argvalues[i]=argvalues[i].trim();
 
             if (funct_name!=""){
 
@@ -66,6 +66,8 @@ export class ws2812SignatureHelpProvider implements SignatureHelpProvider {
                     case 'setup':
                         if (argvalues.length>=3 && argvalues[2]=="99"){ //virtual channel
                             active_signature = 2;
+                        }else if (argvalues.length>=3 && argvalues[2]=="100"){
+                            active_signature = 3;
                         }else if (argvalues.length>=3 && parseInt(argvalues[2])>=12){ //SPI SK9822 channel
                             active_signature = 1;
                         }
