@@ -246,21 +246,19 @@
 							] }]
 	},
 	"blink": {
-		"prefix": "readpng",
-		"body": "readpng channel, file, backcolor, start, len, offset, operator, delay, flip_rows",
-		"description": "Read pixels from a JPG file and fill them in the LED string.",
+		"prefix": "blink",
+		"body": "blink channel, color1, color2, delay, blink_count, startled, len",
+		"description": "Makes a group of leds blink between 2 given colors.",
 		"reference": "",
-		"signatures": [{"label" : "readpng channel, file, backcolor, start, len, offset, operator, delay, flip_rows" , 
-						"documentation":"Read pixels from a PNG file and fill them in the LED string.", 
+		"signatures": [{"label" : "blink channel, color1, color2, delay, blink_count, startled, len" , 
+						"documentation":"Makes a group of leds blink between 2 given colors.", 
 						"parameters": [{"label": "channel", "documentation": "Channel number."},
-									   {"label": "file", "documentation": "File location of the PNG."},
-									   {"label": "backcolor", "documentation": "Color RRGGBB to use for background in case of transparent pixel. Default is the background color defined in the PNG. W can be used for SK6812 in this case the alpha component of the PNG will be rendered in the white LEDs."},
-									   {"label": "start", "documentation": "Start at this LED position (default 0)."},
-									   {"label": "len", "documentation": "Number of LEDs to change (default entire strip)."},
-									   {"label": "offset", "documentation": "Start at pixel offset in the PNG file (default 0)."},
-									   {"label": "operator", "documentation": "Determines binary operator to use to combine current LED color and PNG pixel color. OR,AND,XOR,NOT,= default is to copy PNG pixel color in the LED (=)."},
-									   {"label": "delay", "documentation": "Optional a delay if PNG has multiple pixel rows each row can be rendered into the LED strip with this delay (ms), default is 0 only first row is rendered."},
-									   {"label": "flip_rows", "documentation": "if 1 horizontal rows with odd index in the PNG will be rendered in reverse (can be used for 2D panels)."}
+									   {"label": "color1", "documentation": "First color to blink."},
+									   {"label": "color2", "documentation": "Second color to blink."},
+									   {"label": "delay", "documentation": "Delay between 2 blinks."},
+									   {"label": "blink_count", "documentation": "Number of times to execute blink effect."},
+									   {"label": "startled", "documentation": "Start at this LED index."},
+									   {"label": "len", "documentation": "Apply effect to this number of LEDs starting at startled."}
 							] }]
 	},
 	"random_fade_in_out": {
@@ -275,6 +273,7 @@
 									   {"label": "count", "documentation": "Max number of LEDs that will fade in or out at same time."},
 									   {"label": "delay", "documentation": "Delay between changes in brightness."},
 									   {"label": "step", "documentation": "Number of LEDs to change (default entire strip)."},
+									   {"label": "sync_delay", "documentation": "Random delay in ms to make the fading appear out of sync. set to 0 to make all LEDs start fade in/out at the same time."},
 									   {"label": "inc_dec", "documentation": "Inc_dec = if 1 brightness will start at parameter <brightness> and decrease to initial brightness of the LED, else it will start low and go up."},
 									   {"label": "brightness", "documentation": "Brightness to start or end for fading LEDs."},
 									   {"label": "start", "documentation": "Start position in the string."},
@@ -455,12 +454,13 @@
 	},
 	"signal_thread": {
 		"prefix": "signal_thread",
-		"body": "signal_thread thread_id",
+		"body": "signal_thread thread_id, wait",
 		"description": "Sends a signal to the given thread_id which is waiting with the wait_signal command.",
 		"reference": "",
-		"signatures": [{"label" : "signal_thread thread_id" , 
+		"signatures": [{"label" : "signal_thread thread_id, wait" ,
 						"documentation":"Sends a signal to the given thread_id which is waiting with the wait_signal command.", 
-						"parameters": [{"label": "thread_id", "documentation": "Thread id to send signal to."}
+						"parameters": [{"label": "thread_id", "documentation": "Thread id to send signal to."},
+									   {"label": "wait", "documentation": "if 1, wait until the target thread_id reached a wait_signal command, always set this to 1."}
 							] }]
 	},
 	"reset": {

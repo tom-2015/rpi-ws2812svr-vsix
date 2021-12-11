@@ -23,6 +23,11 @@ none, please report in github [https://github.com/tom-2015/rpi-ws2812svr-vsix.gi
 
 ## Release Notes
 
+## 1.0.5
+
+Fix bug in selected argument when commands start with tabs/spaces
+Fix bug with the random_fade_in_out command
+
 ### 1.0.3
 
 Update new commands.

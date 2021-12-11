@@ -8,8 +8,12 @@ export class ws2812SignatureHelpProvider implements SignatureHelpProvider {
     public provideSignatureHelp( document: TextDocument, position: Position, token: CancellationToken): ProviderResult<SignatureHelp> {
 		var line = document.lineAt(position).text.trim();
 
-        if (line.charAt(0)!='#'){ //check if the line is a comment
+        if (line.length > 0 && line.charAt(0)!='#'){ //check if the line is a comment
             var pos = line.indexOf(" ");
+            var cursor_at_char = position.character;
+            var trim_start_len = document.lineAt(position).text.trimStart().length;
+            if (trim_start_len!=  document.lineAt(position).text.length) cursor_at_char -= (document.lineAt(position).text.length - trim_start_len); //remove leading whitespace index
+
             if (pos <=0) pos = line.length;
             var funct_name: string = line.substr(0, pos).trim(); //get the function name
             //var before_cursor: string = line.substr(0, position.character);
@@ -32,7 +36,7 @@ export class ws2812SignatureHelpProvider implements SignatureHelpProvider {
                             in_string=true;
                             break;
                         case ',':
-                            if (index < position.character) active_parameter++;
+                            if (index < cursor_at_char) active_parameter++;
                             arg_index++;
                             argvalues[arg_index]="";
                             break;
